@@ -1,0 +1,313 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/xhtml">
+
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>首页</title>
+
+		<link href="../AmazeUI-2.4.2/assets/css/amazeui.css" rel="stylesheet" type="text/css" />
+		<link href="../AmazeUI-2.4.2/assets/css/admin.css" rel="stylesheet" type="text/css" />
+
+		<link href="../basic/css/demo.css" rel="stylesheet" type="text/css" />
+
+		<link href="../css/hmstyle.css" rel="stylesheet" type="text/css" />
+		<script src="../AmazeUI-2.4.2/assets/js/jquery.min.js"></script>
+		<script src="../AmazeUI-2.4.2/assets/js/amazeui.min.js"></script>
+
+	</head>
+
+	<body>
+		<div class="hmtop">
+			<!--顶部导航条 -->
+			<div class="am-container header">
+				<ul class="message-l">
+					<div class="topMessage">
+						<div class="menu-hd">
+							<a th:if="${session.user == null}" href="/toLogin" target="_top" class="h">亲，请登录</a>
+							<a th:if="${session.user == null}" href="/toRegister" target="_top">免费注册</a>
+							<a th:if="${session.user != null}" href="/index" th:text="${session.user.nickName}"></a>
+						</div>
+					</div>
+				</ul>
+				<ul class="message-r">
+					<div class="topMessage home">
+						<div class="menu-hd"><a href="/home" target="_top" class="h">商城首页</a></div>
+					</div>
+					<div class="topMessage my-shangcheng">
+						<div class="menu-hd MyShangcheng"><a href="/index" target="_top"><i class="am-icon-user am-icon-fw"></i>个人中心</a></div>
+					</div>
+					<div class="topMessage mini-cart">
+						<div class="menu-hd"><a id="mc-menu-hd" href="/shopCart" target="_top"><i class="am-icon-shopping-cart  am-icon-fw"></i><span>购物车</span><strong id="J_MiniCartNum" class="h"></strong></a></div>
+					</div>
+					<div class="topMessage favorite">
+						<div class="menu-hd"><a href="/collection" target="_top"><i class="am-icon-heart am-icon-fw"></i><span>收藏夹</span></a></div>
+					</div>
+				</ul>
+				</div>
+
+				<!--悬浮搜索框-->
+
+				<div class="nav white">
+					<div class="logo"><img src="../images/logo.png" /></div>
+					<div class="logoBig">
+						<li><img src="../images/logobig.png" /></li>
+					</div>
+
+					<div class="search-bar pr">
+						<a name="index_none_header_sysc" href="#"></a>
+						<form>
+							<input id="searchInput" name="index_none_header_sysc" type="text" placeholder="搜索" autocomplete="off">
+							<input id="ai-topsearch" class="submit am-btn" value="搜索" index="1" type="submit">
+						</form>
+					</div>
+				</div>
+
+				<div class="clear"></div>
+			</div>
+			
+			
+			<div class="banner">
+                      <!--轮播 -->
+						<div class="am-slider am-slider-default scoll" data-am-flexslider id="demo-slider-0">
+							<ul class="am-slides">
+								<li class="banner1" style="background-color: black;"><a><img src="../images/ad1.jpg" /></a></li>
+								<li class="banner2" style="background-color: black;"><a><img src="../images/ad2.jpg" /></a></li>
+								<li class="banner3"><a><img src="../images/ad3.jpg" /></a></li>
+								<li class="banner4" style="background-color: whitesmoke;"><a><img src="../images/ad4.jpg" /></a></li>
+
+							</ul>
+						</div>
+						<div class="clear"></div>	
+			</div>						
+			
+			<div class="shopNav">
+				<div class="slideall">      
+					   <div class="long-title"><span class="all-goods">全部分类</span></div>
+					   <div class="nav-cont">
+							<ul>
+								<li class="index"><a href="/home">首页</a></li>
+							</ul>
+						</div>
+		        				
+						<!--侧边导航 -->
+						<div id="nav" class="navfull">
+							<div class="area clearfix">
+								<div class="category-content" id="guide_2">
+									
+									<div class="category">
+										<ul class="category-list" id="js_climit_li">
+											<li class="appliance js_toggle relative first" th:each="channel:${allChannel.channels}">
+												<div class="category-info">
+													<h3 class="category-name b-category-name"><i><img th:src="@{${'../images/' + channel.icon}}"></i><a class="ml-22" th:text="${channel.channelName}" th:title="${channel.channelName}"></a></h3>
+													<em>&gt;</em></div>
+												<div class="menu-item menu-in top">
+													<div class="area-in">
+														<div class="area-bg">
+															<div class="menu-srot">
+																<div class="sort-side">
+																	<dl class="dl-sort" th:each="item:${channel.sportItems}">
+																		<dt><span title="badminton-plast" th:text="${item.sportItemName}"></span></dt>
+																		<dd th:each="applyer:${item.applyers}"><a th:title="${applyer.applyerName}" th:href="@{${'/search?sportItemId=' + item.sportItemId + '&applyerId=' + applyer.applyerId}}"><span th:text="${applyer.applyerName}"></span></a></dd>
+																	</dl>
+																</div>
+															</div>
+														</div>
+													</div>
+												</div>
+											<b class="arrow"></b>
+										</ul>
+									</div>
+								</div>
+
+							</div>
+						</div>
+						<!--轮播 -->
+						<script type="text/javascript">
+							(function() {
+								$('.am-slider').flexslider();
+							});
+							$(document).ready(function() {
+								$("li").hover(function() {
+									$(".category-content .category-list li.first .menu-in").css("display", "none");
+									$(".category-content .category-list li.first").removeClass("hover");
+									$(this).addClass("hover");
+									$(this).children("div.menu-in").css("display", "block")
+								}, function() {
+									$(this).removeClass("hover")
+									$(this).children("div.menu-in").css("display", "none")
+								});
+							})
+						</script>
+
+					<!--走马灯 -->
+
+					<div class="marqueen">
+						<span class="marqueen-title">商城头条</span>
+						<div class="demo">
+
+							<ul>
+								<li class="title-first"><a target="_blank" href="/news">
+									<img src="../images/TJ2.jpg"></img>
+									<span>[特惠]</span>商城爆品1分秒								
+								</a></li>
+								<li class="title-first"><a target="_blank" href="/news">
+									<span>[公告]</span>商城与广州市签署战略合作协议
+							    </a></li>
+								<li><a target="_blank" href="#"><span>[特惠]</span> 520周末大满减，满299减30表白运动更容易！</a></li>
+								<li><a target="_blank" href="#"><span>[公告]</span>优个网获红双喜“2017年度优秀合作伙伴”奖</a></li>
+								<li><a target="_blank" href="#"><span>[公告]</span>优个运动-山西汾阳店盛大开业！</a></li>
+								<li><a target="_blank" href="#"><span>[特惠]</span>亚瑟士K22跑鞋仅售4.5折</a></li>
+								<li><a target="_blank" href="#"><span>[公告]</span>德国多尼克DONIC授权入驻优个网!</a></li>
+								<li><a target="_blank" href="#"><span>[公告]</span>美津浓预言7|R21优个开售！2018新款震撼上市！</a></li>
+								<li><a target="_blank" href="#"><span>[特惠]</span>多彩春装 运动服低至2折啦！ 换衣换心情！</a></li>
+							</ul>
+                        <div class="advTip"><img src="../images/advTip.jpg"/></div>
+						</div>
+					</div>
+					<div class="clear"></div>
+				</div>
+				<script type="text/javascript">
+					if ($(window).width() < 640) {
+						function autoScroll(obj) {
+							$(obj).find("ul").animate({
+								marginTop: "-39px"
+							}, 500, function() {
+								$(this).css({
+									marginTop: "0px"
+								}).find("li:first").appendTo(this);
+							})
+						}
+						$(function() {
+							setInterval('autoScroll(".demo")', 3000);
+						})
+					}
+				</script>
+			</div>
+			<div class="shopMainbg">
+				<div class="shopMain" id="shopmain">
+
+					<!--今日推荐 -->
+
+					<div class="am-g am-g-fixed recommendation">
+						<div class="clock am-u-sm-3">
+							<img src="../images/2016.jpg "></img>
+							<p>今日<br>推荐</p>
+						</div>
+						<div class="am-u-sm-4 am-u-lg-3 ">
+							<div class="info ">
+								<h3>YONEX 尤尼克斯</h3>
+								<h4>女款珍珠蓝 超轻减震</h4>
+							</div>
+							<div class="recommendationMain ">
+								<img src="../images/tj.jpg "></img>
+							</div>
+						</div>						
+						<div class="am-u-sm-4 am-u-lg-3 ">
+							<div class="info ">
+								<h3>胜利</h3>
+								<h4>胜利S80速度型羽毛球鞋的典范</h4>
+							</div>
+							<div class="recommendationMain ">
+								<img src="../images/tj1.jpg "></img>
+							</div>
+						</div>
+						<div class="am-u-sm-4 am-u-lg-3 ">
+							<div class="info ">
+								<h3>李宁</h3>
+								<h4>男款防泼水缓震跑鞋</h4>
+							</div>
+							<div class="recommendationMain ">
+								<img src="../images/tj2.jpg "></img>
+							</div>
+						</div>
+
+					</div>
+					<div class="clear "></div>
+					<div class="footer">
+						<div class="footer-hd">
+							<p>
+								<a href="/home">商城首页</a>
+							</p>
+						</div>
+						<div class="footer-bd">
+							<p>
+								<em>© 2017-2018 mall.com 胡森 版权所有.</em>
+							</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		</div>
+		<!--菜单 -->
+		<div class=tip>
+			<div id="sidebar">
+				<div id="wrap">
+					<div id="prof" class="item ">
+						<div class="ibar_login_box status_login ">
+							<div class="avatar_box ">
+								<p class="avatar_imgbox "><img th:if="${session.user == null}" src="../images/no-img_mid_.jpg " />
+									<img th:if="${session.user != null}" th:src="@{${session.user.pic}}" />
+								</p>
+								<ul class="user_info ">
+									<li th:if="${session.user != null}" th:text="${'用户名：' + session.user.nickName}"></li>
+									<li th:if="${session.user == null}"><a href="/toLogin">亲，请登录</a></li>
+								</ul>
+							</div>
+							<div class="login_btnbox ">
+								<a th:if="${session.user != null}" href="/order" class="login_order ">我的订单</a>
+								<a th:if="${session.user != null}" href="collection" class="login_favorite ">我的收藏</a>
+							</div>
+							<i class="icon_arrow_white "></i>
+						</div>
+
+					</div>
+					<div id="shopCart " class="item ">
+						<a href="/shopCart">
+							<span class="message "></span>
+						</a>
+						<p>
+							购物车
+						</p>
+					</div>
+					<div id="asset " class="item ">
+						<a href="/wallet">
+							<span class="view "></span>
+						</a>
+						<div class="mp_tooltip ">
+							我的资产
+							<i class="icon_arrow_right_black "></i>
+						</div>
+					</div>
+
+					<div id="foot " class="item ">
+						<a href="/foot">
+							<span class="zuji "></span>
+						</a>
+						<div class="mp_tooltip ">
+							我的足迹
+							<i class="icon_arrow_right_black "></i>
+						</div>
+					</div>
+
+					<div id="brand " class="item ">
+						<a href="/collection">
+							<span class="wdsc "><img src="../images/wdsc.png " /></span>
+						</a>
+						<div class="mp_tooltip ">
+							我的收藏
+							<i class="icon_arrow_right_black "></i>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<script>
+			window.jQuery || document.write('<script src="../basic/js/jquery.min.js "><\/script>');
+		</script>
+		<script type="text/javascript " src="../basic/js/quick_links.js "></script>
+	</body>
+
+</html>

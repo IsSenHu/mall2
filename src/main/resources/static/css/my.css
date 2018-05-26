@@ -1,0 +1,10 @@
+#pay_now {
+    width: 30%;
+    position: absolute;
+    left:35%;
+    bottom: 20%;
+    background: #FFFFFF;
+    display: none;
+    z-index: 10000000000000000000;
+    padding-bottom: 20px;
+}

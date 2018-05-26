@@ -1,0 +1,82 @@
+spring:
+  profiles:
+    active: dev
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://127.0.0.1:3306/mall_shop
+    username: root
+    password: 521428
+  jpa:
+    hibernate:
+      ddl-auto: none
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+    show-sql: false
+#######Redis配置######
+  redis:
+  #Redis数据库索引（默认为0）
+    database: 1
+  #Redis服务地址
+    host: 127.0.0.1
+  #Redis服务连接端口
+    port: 6379
+  #Redis服务器连接密码（默认为空）
+    password:
+    jedis:
+      pool:
+      #连接池最大连接数（使用负值表示没有限制）
+        max-active: 1000
+      #连接池最大阻塞等待时间（使用负值表示没有限制）
+        max-wait: -1
+      #连接池中最大的空闲连接
+        max-idle: 10
+      #连接池中最小的空闲连接
+        min-idle: 2
+  #连接超时时间
+    timeout: 5000
+######RabbitMQ######
+  rabbitmq:
+    addresses: 127.0.0.1
+    port: 5672
+    username: husen
+    password: 521428sly
+    virtual-host: /
+    listener:
+      simple:
+      #最小消息监听线程数
+        concurrency: 2
+      #最大消息监听线程数
+        max-concurrency: 2
+######thymeleaf######
+  thymeleaf:
+    prefix: classpath:/templates/
+    suffix: .html
+    mode: HTML5
+    encoding: UTF-8
+    servlet:
+      content-type: text/html
+    cache: false
+######发送邮件######
+  mail:
+    host: smtp.qq.com
+    username: 1178515826@qq.com
+    password: cbdawoqticnyhajc
+    port: 587
+    default-encoding: UTF-8
+######RabbitMQ######
+  rabbitmq:
+    addresses: 127.0.0.1
+    port: 5672
+    username: husen
+    password: 521428sly
+    virtual-host: /
+    listener:
+      simple:
+      #最小消息监听线程数
+        concurrency: 2
+      #最大消息监听线程数
+
+
+
+
+
